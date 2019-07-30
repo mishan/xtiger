@@ -1,0 +1,6 @@
+Installation Instructions for Tiger
+-----------------------------------
+
+1. make
+2. make install [PREFIX=...] OR put the 'tiger' binary wherever you
+want.

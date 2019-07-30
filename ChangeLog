@@ -1,0 +1,11 @@
+0.8.1
+------
+-Fixed command and debug prompts
+
+0.8
+------
+-Acquired source from Jonas Minnberg and permission to GPL it
+-No longer using gets() function
+-Removed SVGA code
+-Ported over to libggi
+-Added command line option to specify ROM file on command line

@@ -1,0 +1,13 @@
+Source: tiger
+Section: math
+Priority: optional
+Maintainer: Misha Nasledov <misha@nasledov.com>
+Build-Depends: debhelper, libggi-dev
+Standards-Version: 3.2.1
+
+Package: tiger
+Architecture: i386
+Depends: libggi-target-emu, libggi-target-svgalib | libggi-target-x | libggi-target-fbdev | libggi-target-aa, ${shlibs:Depends}
+Description: A TI-92 Emulator
+ An emulator of the Texas Instruments TI-92 calculator.  You must
+ have a TI-92 ROM to use it.
