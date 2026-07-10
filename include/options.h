@@ -6,6 +6,9 @@
   * Copyright 1995, 1996 Bernd Schmidt, Ed Hanway
   */
 
+#include <stdlib.h>
+#include <string.h>
+
 #ifdef __mac__
 /* Apparently, no memcpy :-/ */
 static __inline__ void *memcpy(void *to, void *from, int size)

@@ -1,3 +1,19 @@
+0.9
+------
+-Added a terminal frontend (tiger-term): renders the LCD in 24-bit
+ color as half-blocks, quadrants, sextants, or braille depending on
+ terminal size, no display server needed
+-Fixed the codebase to compile with modern GCC (missing prototypes,
+ implicit int, wrong printf formats on 64-bit, bad pointer casts in
+ gencpu output)
+-Replaced the libggi frontend with SDL2 (runs natively on Wayland
+ and X11)
+-Grayscale palette and LCD contrast now actually work
+-Added frame pacing to approximate real TI-92 speed ("tickrate 0"
+ to disable)
+-Integer-scaled resizable window
+-Modernized the Makefile (pkg-config, dropped stale i386 flags)
+
 0.8.1
 ------
 -Fixed command and debug prompts

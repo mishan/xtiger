@@ -92,11 +92,11 @@ void enter_debugger(void) {
 	}
 
 	if(rem >= 0) {
-	  printf("Breakpoint at 0x%08p removed\n", mempos);
+	  printf("Breakpoint at 0x%08x removed\n", mempos);
 	  breakPoints--;
 	}
 	else {
-	  printf("Breakpoint at 0x%08p added\n", mempos);
+	  printf("Breakpoint at 0x%08x added\n", mempos);
 	  breakAdr[breakPoints] = mempos;
 	  breakSave[breakPoints++] = get_word(mempos);
 	}
@@ -104,7 +104,7 @@ void enter_debugger(void) {
       else {
 	printf("Defined breakpoints:\n");
 	for(i=0; i<breakPoints; i++)
-	  printf("Break #%d: 0x%08p\n",i, breakAdr[i]);
+	  printf("Break #%d: 0x%08x\n",i, breakAdr[i]);
       }
       break;
     case 't' :
@@ -144,7 +144,7 @@ void enter_debugger(void) {
 	int found = 0;
 	parsenum(c, 2, &mempos);
 	parsenum(c, 3, &len);
-	printf("Searching for $%x between $%08p and $%08p...\n", what, mempos, mempos+len);
+	printf("Searching for $%x between $%08x and $%08x...\n", what, mempos, mempos+len);
 	for(nextpc = mempos ; nextpc < (mempos+len); nextpc += ((asize == 1) ? 1 : 2)) {
 	  if(asize == 1)
 	    found = (get_byte(nextpc) == what);
@@ -157,7 +157,7 @@ void enter_debugger(void) {
 	  
 	  if(found) {
 	    found = 0;
-	    printf(" $%08p", nextpc);
+	    printf(" $%08x", nextpc);
 	  }
 	}
 	printf("\n");

@@ -1,0 +1,11 @@
+*.o
+tiger
+build68k
+gencpu
+cpudefs.c
+cpu?.c
+cpustbl.c
+cputbl.h
+ti92.mem
+ti92.rom
+tiger.cfg

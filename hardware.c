@@ -30,7 +30,7 @@ int internalLink = 0;
 
 int timeOut = 0;
 
-cycleInstr = 640;
+int cycleInstr = 640;
 
 void update_contrast(void) {
   set_contrast( ((ti_io[0x1d]&0xf)<<1) | ((ti_io[0]>>5)&1) );

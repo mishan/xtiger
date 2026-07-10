@@ -10,6 +10,7 @@ extern void do_period(void);
 extern void link_putbyte(UBYTE arg);
 extern UBYTE link_getbyte(void);
 extern int link_byteavail(void);
+extern int link_checkread(void);
 extern void init_hardware(char*);
 extern void exit_hardware(void);
 
