@@ -167,7 +167,7 @@ static void ShowEA(int reg, amodes mode, wordsizes size)
      case Ad16:
 	disp16 = nextiword();
 	addr = regs.a[reg] + (WORD)disp16;
-	printf("(A%d,$%04lx) == $%08lx", reg, disp16, (long unsigned int)addr);
+	printf("(A%d,$%04x) == $%08x", reg, disp16, addr);
 	break;
      case Ad8r:
 	dp = nextiword();
@@ -177,15 +177,15 @@ static void ShowEA(int reg, amodes mode, wordsizes size)
 	if (!(dp & 0x800)) dispreg = (LONG)(WORD)(dispreg);
 	
 	addr = regs.a[reg] + disp8 + dispreg;
-	printf("(A%d, %c%d.%c, $%02x) == $%08lx", reg, 
+	printf("(A%d, %c%d.%c, $%02x) == $%08x", reg, 
 	       dp & 0x8000 ? 'A' : 'D', (int)r, dp & 0x800 ? 'L' : 'W', disp8,
-	       (long unsigned int)addr);
+	       addr);
 	break;
      case PC16:
 	addr = m68k_getpc();
 	disp16 = nextiword();
 	addr += (WORD)disp16;
-	printf("(PC,$%08lx) == $%08lx", disp16, (long unsigned int)addr);
+	printf("(PC,$%08x) == $%08x", disp16, addr);
 	break;
      case PC8r:
 	addr = m68k_getpc();
@@ -196,14 +196,14 @@ static void ShowEA(int reg, amodes mode, wordsizes size)
 	
 	if (!(dp & 0x800)) dispreg = (LONG)(WORD)(dispreg);
 	addr += disp8 + dispreg;
-	printf("(PC, %c%d.%c, $%02x) == $%08lx", dp & 0x8000 ? 'A' : 'D', 
-	       (int)r, dp & 0x800 ? 'L' : 'W', disp8, (long unsigned int)addr);
+	printf("(PC, %c%d.%c, $%02x) == $%08x", dp & 0x8000 ? 'A' : 'D', 
+	       (int)r, dp & 0x800 ? 'L' : 'W', disp8, addr);
 	break;
      case absw:
-	printf("$%08lx", (LONG)(WORD)nextiword());
+	printf("$%08x", (LONG)(WORD)nextiword());
 	break;
      case absl:
-	printf("$%08lx", nextilong());
+	printf("$%08x", nextilong());
 	break;
      case imm:
 	switch(size){
@@ -212,22 +212,22 @@ static void ShowEA(int reg, amodes mode, wordsizes size)
 	 case sz_word:
 	    printf("#$%04x", nextiword()); break;
 	 case sz_long:
-	    printf("#$%08lx", nextilong()); break;
+	    printf("#$%08x", nextilong()); break;
 	 default:
 	    abort();
 	}
 	break;
      case imm0:
-	printf("#$%02lx", nextiword() & 0xff);
+	printf("#$%02x", nextiword() & 0xff);
 	break;
      case imm1:
-	printf("#$%04lx", nextiword());
+	printf("#$%04x", nextiword());
 	break;
      case imm2:
-	printf("#$%08lx", nextilong());
+	printf("#$%08x", nextilong());
 	break;
      case immi:
-	printf("#$%04lx", reg);
+	printf("#$%04x", reg);
 	break;
      default:
 	abort();
@@ -593,7 +593,7 @@ void MC68000_disasm(CPTR addr, CPTR *nextpc, int cnt)
 	UWORD special = 0;
 	struct mnemolookup *lookup;
 	struct instr *dp;
-	printf("%08lx: ", m68k_getpc());
+	printf("%08x: ", m68k_getpc());
 	for(opwords = 0; opwords < 5; opwords++){
 	    printf("%04x ", get_word(m68k_getpc() + opwords*2));
 	}
@@ -643,17 +643,17 @@ void MC68000_dumpstate(CPTR *nextpc)
 {
     int i;
     for(i = 0; i < 8; i++){
-	printf("D%d: %08lx ", i, regs.d[i]);
+	printf("D%d: %08x ", i, regs.d[i]);
 	if ((i & 3) == 3) printf("\n");
     }
     for(i=0;i<8;i++){
-	printf("A%d: %08lx ", i, regs.a[i]);
+	printf("A%d: %08x ", i, regs.a[i]);
 	if ((i & 3) == 3) printf("\n");
     }
     printf ("T=%d S=%d X=%d N=%d Z=%d V=%d C=%d IMASK=%d\n", regs.t, regs.s, 
 	    regs.x, NFLG, ZFLG, VFLG, CFLG, regs.intmask);
     MC68000_disasm(m68k_getpc(), nextpc, 1);
-    printf("next PC: %08lx\n", *nextpc);
+    printf("next PC: %08x\n", *nextpc);
 }
 
 #endif

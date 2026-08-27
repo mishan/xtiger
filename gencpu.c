@@ -47,8 +47,8 @@ static void read_counts(void)
     file=fopen("insncount","r");
     if(file)
     {
-	fscanf(file,"Total: %d",&total);
-	while(fscanf(file,"%x: %d\n",&opcode,&count)==2)
+	fscanf(file,"Total: %lu",&total);
+	while(fscanf(file,"%lx: %lu\n",&opcode,&count)==2)
 	{
 	    counts[opcode]=10000.0*count/total;
 	    if(isspecific(opcode))
@@ -1145,12 +1145,12 @@ static void gen_opcode(unsigned long int opcode)
 	genamode(table68k[opcode].smode, "srcreg", table68k[opcode].size, "src", 1, 0);
 	genamode(Apdi, "7", sz_long, "sp", 0, 0);
 	genastore("m68k_getpc()", Apdi, "7", sz_long, "sp");
-	printf("\tregs.pc_p = (UWORD *)(oldpcp + (LONG)src);\n");
+	printf("\tregs.pc_p = (UBYTE *)(oldpcp + (LONG)src);\n");
 	break;
      case i_Bcc:
 	printf("\tchar *oldpcp = (char *)regs.pc_p;\n");
 	genamode(table68k[opcode].smode, "srcreg", table68k[opcode].size, "src", 1, 0);
-	printf("\tif (cctrue(%d)) regs.pc_p = (UWORD *)(oldpcp + (LONG)src);\n", table68k[opcode].cc);
+	printf("\tif (cctrue(%d)) regs.pc_p = (UBYTE *)(oldpcp + (LONG)src);\n", table68k[opcode].cc);
 	break;
      case i_LEA:
 	genamode(table68k[opcode].smode, "srcreg", table68k[opcode].size, "src", 0, 0);
@@ -1166,7 +1166,7 @@ static void gen_opcode(unsigned long int opcode)
 	genamode(table68k[opcode].smode, "srcreg", table68k[opcode].size, "src", 1, 0);
 	genamode(table68k[opcode].dmode, "dstreg", table68k[opcode].size, "offs", 1, 0);
 	printf("\tif (!cctrue(%d)) {\n", table68k[opcode].cc);
-	printf("\tif (src--) regs.pc_p = (UWORD *)((char *)regs.pc_p + (LONG)offs - 2);\n");
+	printf("\tif (src--) regs.pc_p = (UBYTE *)((char *)regs.pc_p + (LONG)offs - 2);\n");
 	genastore("src", table68k[opcode].smode, "srcreg", table68k[opcode].size, "src");
 	printf("\t}\n");
 	break;
@@ -1819,9 +1819,9 @@ static void generate_smalltable(void)
 	    && table68k[opcode].mnemo != i_ILLG) 
 	{
 	    if (isspecific(opcode))
-		printf("{ op_%x_s, 1, %d },\n", opcode, opcode);
+		printf("{ op_%lx_s, 1, %ld },\n", opcode, opcode);
 	    if (table68k[opcode].handler == -1)
-		printf("{ op_%x, 0, %d },\n", opcode, opcode);
+		printf("{ op_%lx, 0, %ld },\n", opcode, opcode);
 	}
     }
     printf("{ 0, 0, 0 }};\n");

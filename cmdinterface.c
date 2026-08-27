@@ -36,11 +36,10 @@ tifile dirBuffer[64];
 
 char currDir[128] = "";
 
-int do_command(unsigned char *cmd, unsigned char *arg1);
 
 
 void cmd_update_progbar(int size) {
-  static cnt = 0;
+  static int cnt = 0;
   if((cnt++)&1) {
     printf(".");
     fflush(stdout);
@@ -53,7 +52,7 @@ void print_dir(void) {
     if(dirBuffer[i].type == 0x1f)
       printf("\n[%s]\n", dirBuffer[i].name);
     else
-      printf("  %-012s %-4s %d\n", dirBuffer[i].name, varNames[dirBuffer[i].type], dirBuffer[i].size);
+      printf("  %-12s %-4s %d\n", dirBuffer[i].name, varNames[dirBuffer[i].type], dirBuffer[i].size);
     i++;
   }
   
@@ -135,7 +134,7 @@ void load_cfg_file(char *name) {
 
 int getOut = 0;
 
-int do_command(unsigned char *cmd, unsigned char *arg1) {
+int do_command(char *cmd, char *arg1) {
     
 
   if(cmdState) {
@@ -153,7 +152,7 @@ int do_command(unsigned char *cmd, unsigned char *arg1) {
 	  printf("  [%s]\n", dent->d_name);
 	else
 	if(!strcmp(ext, "92P") || !strcmp(ext, "92B"))
-	  printf("  %-32s %d\n", dent->d_name, aStat.st_size);
+	  printf("  %-32s %ld\n", dent->d_name, (long)aStat.st_size);
       }
       closedir(dir);
     }

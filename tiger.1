@@ -1,0 +1,107 @@
+.TH TIGER 1 "August 2026" "xtiger 0.9" "User Commands"
+.SH NAME
+tiger, tiger-term \- TI-92 emulator
+.SH SYNOPSIS
+.B tiger
+[\fB\-r\fR \fIromfile\fR] [\fB\-c\fR \fIcfgfile\fR]
+.br
+.B tiger-term
+[\fB\-r\fR \fIromfile\fR] [\fB\-c\fR \fIcfgfile\fR]
+.SH DESCRIPTION
+.B tiger
+emulates the Texas Instruments TI-92 graphing calculator. It draws the
+calculator's LCD in a resizable window using SDL2, running natively under
+either Wayland or X11.
+.PP
+.B tiger-term
+is the same emulator rendering to a terminal instead, in 24-bit color,
+using half-blocks, quadrants, sextants, or braille depending on how much
+room the terminal has. It needs no display server.
+.PP
+A TI-92 ROM image is required and is not supplied with this program; see
+.B FILES
+below.
+.SH OPTIONS
+.TP
+.BI \-r " romfile"
+Use the specified ROM image instead of
+.IR ti92.rom .
+.TP
+.BI \-c " cfgfile"
+Use the specified config file instead of
+.IR tiger.cfg .
+.SH KEYS
+Letters, digits, F1\-F8, the arrow keys and the usual arithmetic keys map
+directly to their TI-92 equivalents. The calculator's modifier and
+function keys are reached as follows:
+.PP
+.TS
+tab(@);
+l l.
+Shift@SHIFT
+Ctrl@DIAMOND
+Alt@2ND
+Caps Lock@HAND
+Tab@STO>
+Home@CLEAR
+PageUp@MODE
+Scroll Lock@ON
+Insert@LN
+Delete@SIN
+End@COS
+PageDown@TAN
+F12@APPS
+;@THETA
+<@(\-) negate
+.TE
+.PP
+.B F9
+enters the built-in debugger,
+.B F10
+enters command mode, and
+.B F11
+quits.
+.PP
+Terminals report no key-release events, so under
+.B tiger-term
+a key reads as held for a short time after each press, and the modifiers
+differ: an uppercase letter is SHIFT plus that letter, Alt plus a key is
+2ND, and Ctrl plus a key is DIAMOND. Ctrl-O is ON, Ctrl-T cycles the
+render mode, Ctrl-L forces a redraw, and Ctrl-Q quits.
+.SH COMMAND MODE
+Pressing F10 gives a prompt on the controlling terminal.
+.B help
+lists the available commands,
+.B "load \fIfile\fB.92p"
+sends a file to the emulated calculator over the link port, and
+.B quit
+returns to the emulator. Settings made here can be written to a config
+file with
+.BR putcfg .
+.SH FILES
+.TP
+.I ti92.rom
+The ROM image, read from the current directory unless
+.B \-r
+says otherwise. ROM images are copyrighted by Texas Instruments and are
+not distributed with this program; you must dump one from a calculator
+you own.
+.TP
+.I ti92.mem
+Machine state, written to the current directory on exit and reloaded at
+startup.
+.TP
+.I tiger.cfg
+Config file, read from the current directory unless
+.B \-c
+says otherwise.
+.SH AUTHORS
+Written by Jonas Minnberg and released under the GPL in 2001 by
+Misha Nasledov, who has maintained it since. The 68k emulation core
+derives from UAE.
+.SH SEE ALSO
+.BR tiemu (1)
+.PP
+This program is preserved rather than actively developed. TiEmu, which
+descends from this codebase, is the more capable emulator for day-to-day
+use.

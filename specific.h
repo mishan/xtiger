@@ -23,6 +23,12 @@ extern int update_keys(void);
 /* Set the TI92 contrast (between 0-32) */
 extern void set_contrast(int);
 
+/* Recompute the palette from grayPlanes/contrast */
+extern void set_colors(void);
+
+/* Frontend progress-bar update during link transfers */
+extern void update_progbar(int size);
+
 /* Return if a certain TI92 key was pressed when update_keys() was last called */
 extern int is_key_pressed(int);
 

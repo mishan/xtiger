@@ -13,6 +13,8 @@
 #include "debug.h"
 #include "hardware.h"
 #include "specific.h"
+#include "keyboard.h"
+#include "cmdinterface.h"
 #include "globinfo.h"
 
 
