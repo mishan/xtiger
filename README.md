@@ -1,6 +1,24 @@
 # xtiger
 
-xtiger is a free TI-92 emulator. It was originally written by Jonas Minnberg and was closed source. There were two versions: the SVGA version and an Xlib version. Jonas Minnberg has not worked on XTiger for quite a while and he gave me (Misha Nasledov) the code and permission to GPL it, after I asked him if there was any chance he would open source it.
+xtiger is a TI-92 emulator for Linux, and the original one: this is the
+codebase that TiEmu and most of the other TI-68k emulators descend from.
+
+Jonas Minnberg wrote it in the late 1990s as "Tiger", closed source, in
+SVGAlib and Xlib versions. After he had stopped working on it I (Misha
+Nasledov) asked whether he would consider open sourcing it; he gave me
+the source and permission to release it under the GPL, which happened in
+2001. It has been forked and ported many times since — most visibly by
+TiEmu, which took the emulation core and grew a full TI-89/92/92+/V200
+emulator with a graphical debugger around it.
+
+**This repository is preserved, not actively maintained.** If you want a
+TI-68k emulator to actually use, use [TiEmu][]. What's here is the
+original source, brought up to date in 2026 to the point where it still
+builds and runs on a current system — SDL2 in place of Xlib, and a fix-up
+pass for modern compilers — and then left there. Pull requests are
+welcome but not watched closely; open an issue first if you want a reply.
+
+[TiEmu]: https://sourceforge.net/projects/gtktiemu/
 
 There are two frontends:
 
@@ -68,3 +86,17 @@ Press F10 to enter command mode on the terminal. `help` lists
 commands; `load file.92p` sends a file over the emulated link port;
 `quit` returns to the emulator. Settings can also be placed in a
 config file (default `tiger.cfg`; see the `putcfg` command).
+
+## Credits and license
+
+Originally written by Jonas Minnberg; released as open source and
+maintained since 2001 by Misha Nasledov. The 68k emulation core, and the
+build-time code generation that produces it, come from UAE. See `AUTHORS`
+and `ChangeLog` for the details, and `HACKING` for Jonas's original notes
+on the source.
+
+Licensed under the GNU General Public License; see `COPYING`.
+
+No ROM images are included or distributed here. TI-92 ROMs are
+copyrighted by Texas Instruments and must be dumped from a calculator you
+own.

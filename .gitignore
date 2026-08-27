@@ -1,5 +1,6 @@
 *.o
 tiger
+tiger-term
 build68k
 gencpu
 cpudefs.c

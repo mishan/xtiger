@@ -35,12 +35,18 @@ tiger-term: $(COREOBJS) termspecific.o
 sdlspecific.o: sdlspecific.c
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(SDL_CFLAGS) -c $< -o $@
 
+MANDIR ?= $(PREFIX)/share/man/man1
+
 install: tiger tiger-term
 	install -d $(DESTDIR)$(PREFIX)/bin
 	install -c tiger tiger-term $(DESTDIR)$(PREFIX)/bin/
+	install -d $(DESTDIR)$(MANDIR)
+	install -m 644 tiger.1 $(DESTDIR)$(MANDIR)/
+	ln -sf tiger.1 $(DESTDIR)$(MANDIR)/tiger-term.1
 
 uninstall:
 	rm -f $(DESTDIR)$(PREFIX)/bin/tiger $(DESTDIR)$(PREFIX)/bin/tiger-term
+	rm -f $(DESTDIR)$(MANDIR)/tiger.1 $(DESTDIR)$(MANDIR)/tiger-term.1
 
 clean:
 	-rm -f *.o tiger tiger-term
