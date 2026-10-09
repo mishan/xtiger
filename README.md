@@ -1,7 +1,8 @@
 # xtiger
 
-xtiger is a TI-92 emulator for Linux, and the original one: this is the
-codebase that TiEmu and most of the other TI-68k emulators descend from.
+xtiger is Jonas Minnberg's TI-92 emulator for Linux, and the original
+one: this is the codebase that TiEmu and most of the other TI-68k
+emulators descend from.
 
 Jonas Minnberg wrote it in the late 1990s as "Tiger", closed source, in
 SVGAlib and Xlib versions. After he had stopped working on it I (Misha
